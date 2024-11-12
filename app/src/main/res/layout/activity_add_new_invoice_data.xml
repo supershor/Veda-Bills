@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@drawable/g"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addNewInvoiceData">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!-- Header Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:src="@drawable/hollow_stroke_white"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:src="@drawable/hollow_stroke_white"/>
+                <ImageView
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:src="@drawable/hollow_stroke_white"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:src="@drawable/hollow_stroke_white"/>
+            </LinearLayout>
+            <!-- Sender Details Section -->
+            <LinearLayout
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Sender's Segment"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/senderCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Company Name"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/senderGSTNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="GST Number"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/senderAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+            </LinearLayout>
+
+
+            <!-- Invoice Details Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Invoice Details"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/invoiceNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:hint="Invoice Number"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:alpha="0.85"
+                        android:id="@+id/generateRandomNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:text="Random"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:backgroundTint="@color/white"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/invoiceDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:hint="Invoice Date"
+                        android:inputType="date"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:alpha="0.85"
+                        android:id="@+id/useTodayDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:text="Today"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:backgroundTint="@color/white"/>
+                </LinearLayout>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/placeOfSupply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Place of Supply"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/reverseCharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Reverse Charge"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+            </LinearLayout>
+
+
+            <!-- Recipient Details Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp"
+                 >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Recipient's Segment"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Billed To"
+                        android:layout_marginBottom="@dimen/_10sdp"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/billedToCompanyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Company Name"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/billedToGSTNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="GST Number"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/billedToAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Shipped To"
+                        android:layout_marginBottom="@dimen/_10sdp"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/shippedToCompanyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Company Name"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/shippedToGSTNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="GST Number"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/shippedToAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bank Details Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp"
+                 >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Bank Details"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/cifNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CIF Number"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/branchName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Branch Name"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/accountNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Account Number"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/accountType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Account Type"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+
+                <AutoCompleteTextView
+                    android:alpha="0.85"
+                    android:id="@+id/ifscCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="IFSC Code"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"/>
+            </LinearLayout>
+
+            <!-- Product List Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Product List"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <!-- RecyclerView for Product Items -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewProducts"
+                    android:layout_width="match_parent"
+                    tools:listitem="@layout/product_item"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <!-- Add Product Button -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonAddProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Product"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_10sdp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/baseline_add_24"
+    app:fabSize="normal"
+    android:layout_marginBottom="@dimen/_30sdp"
+    android:layout_marginRight="@dimen/_30sdp"
+    android:id="@+id/add_new_invoice"
+    android:backgroundTint="@color/black"
+    android:layout_gravity="bottom|right"
+    android:padding="@dimen/_5sdp"
+    tools:ignore="ContentDescription,RtlHardcoded" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

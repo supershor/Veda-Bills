@@ -1,0 +1,170 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:alpha="1"
+    android:padding="@dimen/_10sdp"
+    android:layout_margin="@dimen/_5sdp">
+
+    <AutoCompleteTextView
+        android:alpha="0.85"
+        android:id="@+id/editDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:background="@drawable/rounded_corner_background_light"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <AutoCompleteTextView
+            android:alpha="0.85"
+
+            android:id="@+id/editHSNCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_5sdp"
+
+            android:hint="HSN Code"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_corner_background_light"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+        <AutoCompleteTextView
+            android:alpha="0.85"
+
+            android:id="@+id/editUnit"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Unit"
+            android:background="@drawable/rounded_corner_background_light"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <AutoCompleteTextView
+            android:background="@drawable/rounded_corner_background_light"
+            android:id="@+id/editMRP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="MRP"
+            android:alpha="0.85"
+
+            android:textColorHint="@color/black"
+            android:layout_marginEnd="@dimen/_5sdp"
+
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+        <AutoCompleteTextView
+            android:id="@+id/editQuantity"
+            android:layout_width="0dp"
+            android:alpha="0.85"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner_background_light"
+            android:hint="Quantity"
+            android:layout_marginStart="@dimen/_5sdp"
+
+            android:inputType="number"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <AutoCompleteTextView
+            android:id="@+id/editListPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.85"
+
+            android:background="@drawable/rounded_corner_background_light"
+            android:layout_weight="1"
+            android:hint="List Price"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+        <AutoCompleteTextView
+            android:id="@+id/editDiscount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Disc."
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:alpha="0.85"
+
+            android:layout_marginStart="@dimen/_5sdp"
+
+            android:background="@drawable/rounded_corner_background_light"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <Spinner
+            android:id="@+id/spinnerCGST"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/cgst_sgst_array"
+            android:alpha="0.85"
+
+            android:backgroundTint="@color/white"
+            android:background="@drawable/rounded_corner_background_light"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+        <Spinner
+            android:id="@+id/spinnerSGST"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:alpha="0.85"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/rounded_corner_background_light"
+            android:entries="@array/cgst_sgst_array"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+    </LinearLayout>
+</LinearLayout>
