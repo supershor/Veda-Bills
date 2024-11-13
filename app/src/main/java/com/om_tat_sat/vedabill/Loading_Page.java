@@ -44,12 +44,12 @@ public class Loading_Page extends AppCompatActivity {
 
         Log.d(TAG, "Setting up Google Sign-In options");
 //        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken()
+//                .requestIdToken("48175944108-kr743i46hijkr1r6tbd3mvdf01taplpj.apps.googleusercontent.com")
 //                .requestEmail()
 //                .build();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                  .requestIdToken()
+                  .requestIdToken("48175944108-0agibikvvmchukk2qffal09otmqeng62.apps.googleusercontent.com")
                   .requestEmail()
                   .build();
         // Build a GoogleSignInClient with the options specified by gso.
