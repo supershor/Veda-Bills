@@ -6,6 +6,11 @@ plugins {
 android {
     namespace = "com.om_tat_sat.vedabill"
     compileSdk = 34
+    bundle{
+        language{
+            enableSplit=true
+        }
+    }
 
     defaultConfig {
         applicationId = "com.om_tat_sat.vedabill"
@@ -34,6 +39,7 @@ android {
 
 dependencies {
 
+    implementation("com.android.volley:volley:1.2.1")
     implementation ("com.google.android.gms:play-services-auth:20.2.0")
     implementation ("com.google.firebase:firebase-auth:21.0.6")
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))

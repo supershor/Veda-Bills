@@ -8,35 +8,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Loading_Page">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/verifying_anim"
+        app:lottie_autoPlay="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:id="@+id/verifyAnim"
+        android:visibility="gone"
+        android:layout_marginBottom="0dp"/>
+
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="UselessParent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:ignore="ScrollViewSize,UselessLeaf">
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_400sdp"
+                    android:layout_height="@dimen/_300sdp"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/loading_anim_main_loading"
                     app:lottie_autoPlay="true"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginBottom="0dp"
-                    />
+                    android:layout_marginBottom="0dp" />
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:theme="@style/font_regular"
                     style="@style/font_regular"
@@ -46,38 +65,86 @@
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Create invoices within 10 seconds and easily share invoice PDFs globally with a Chrome link."
+                    android:text="@string/create_invoice_description"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
-                    />
-                <androidx.appcompat.widget.AppCompatButton
+                    android:textColor="@color/white" />
+
+                <EditText
+                    android:autofillHints="phone"
+                    android:alpha="0.75"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textColorHint="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:padding="@dimen/_10sdp"
                     android:theme="@style/font_regular"
                     style="@style/font_regular"
-                    android:layout_width="match_parent"
-                    android:id="@+id/loading_page_google"
-                    android:layout_height="wrap_content"
-                    android:text="Continue With Google"
                     android:textSize="@dimen/_14ssp"
+                    android:digits="1234567890"
                     android:layout_marginLeft="@dimen/_30sdp"
                     android:layout_marginRight="@dimen/_30sdp"
                     android:textColor="@color/black"
-                    android:layout_marginBottom="@dimen/_20sdp"
                     android:background="@drawable/less_border_white"
-                    />
+                    android:id="@+id/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number_hint"
+                    android:inputType="phone" />
+
                 <androidx.appcompat.widget.AppCompatButton
+                    android:alpha="0.75"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textColorHint="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_30sdp"
+                    android:layout_marginRight="@dimen/_30sdp"
                     android:theme="@style/font_regular"
                     style="@style/font_regular"
                     android:layout_width="match_parent"
                     android:id="@+id/loading_page_phoneNumber"
                     android:layout_height="wrap_content"
-                    android:text="Use Phone Number"
+                    android:text="@string/verify_button"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/less_border_white" />
+
+                <EditText
+                    android:alpha="0.75"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    android:maxLength="6"
+                    android:layout_marginLeft="@dimen/_30sdp"
+                    android:layout_marginRight="@dimen/_30sdp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:digits="1234567890"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_background_light"
+                    android:id="@+id/otp_code"
+                    android:hint="@string/otp_code_hint"
+                    android:visibility="gone"
+                    tools:ignore="Autofill,TextFields" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:alpha="0.75"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textColorHint="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:padding="@dimen/_10sdp"
+                    android:theme="@style/font_regular"
+                    style="@style/font_regular"
                     android:textSize="@dimen/_14ssp"
                     android:layout_marginLeft="@dimen/_30sdp"
                     android:layout_marginRight="@dimen/_30sdp"
                     android:textColor="@color/black"
-                    android:layout_marginBottom="@dimen/_50sdp"
                     android:background="@drawable/less_border_white"
-                    />
+                    android:id="@+id/verify_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verify_otp_button"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

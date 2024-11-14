@@ -30,4 +30,7 @@
         <item name="fontFamily">@font/playfairdisplay_medium</item>
         <item name="font">@font/playfairdisplay_medium</item>
     </style>
+    <style name="CustomDatePicker" parent="android:Widget.DatePicker">
+        <item name="android:textColor">@color/date_picker_text_color</item>
+    </style>
 </resources>

@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/google-services.json
+app/src/main/java/com/om_tat_sat/vedabill/apiPassword.java

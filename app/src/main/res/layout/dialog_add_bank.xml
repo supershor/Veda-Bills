@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/input_cif_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/cif_number"
+        android:autofillHints="cifNumber"
+        tools:ignore="Autofill,TextFields" />
+
+    <EditText
+        tools:ignore="Autofill,TextFields"
+        android:id="@+id/input_branch_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="branchName"
+        android:hint="@string/branch_name" />
+
+    <EditText
+        android:id="@+id/input_account_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="accountNumber"
+        android:hint="@string/account_number"
+        tools:ignore="TextFields" />
+
+    <EditText
+        android:id="@+id/input_account_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="accountType"
+        tools:ignore="Autofill,TextFields"
+        android:hint="@string/account_type" />
+
+    <EditText
+        android:id="@+id/input_ifsc_code"
+        android:autofillHints="ifscCode"
+        tools:ignore="Autofill,TextFields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ifsc_code" />
+</LinearLayout>

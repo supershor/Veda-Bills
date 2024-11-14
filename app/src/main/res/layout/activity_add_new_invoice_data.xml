@@ -23,151 +23,69 @@
                 android:orientation="horizontal"
                 android:weightSum="4">
                 <ImageView
+                    android:id="@+id/image1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_3sdp"
-                    android:src="@drawable/hollow_stroke_white"/>
+                    android:src="@drawable/hollow_stroke_white"
+                    tools:ignore="ContentDescription" />
                 <ImageView
+                    android:id="@+id/image2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:src="@drawable/hollow_stroke_white"/>
+                    android:src="@drawable/hollow_stroke_white"
+                    tools:ignore="ContentDescription" />
                 <ImageView
+                    android:id="@+id/image3"
+                    tools:ignore="ContentDescription"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:src="@drawable/hollow_stroke_white"/>
                 <ImageView
+                    android:id="@+id/image4"
                     android:layout_width="match_parent"
+                    tools:ignore="ContentDescription"
                     android:layout_height="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_3sdp"
                     android:src="@drawable/hollow_stroke_white"/>
             </LinearLayout>
-
-            <!-- Sender Details Section -->
             <LinearLayout
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_3sdp"
+                android:id="@+id/senderDetailsSectionLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:padding="@dimen/_10sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Sender's Segment"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="@dimen/_10sdp"/>
-
-                <AutoCompleteTextView
-                    android:alpha="0.85"
-                    android:id="@+id/senderCompanyName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Company Name"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:padding="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/rounded_corner_background_light"/>
-
-                <AutoCompleteTextView
-                    android:alpha="0.85"
-                    android:id="@+id/senderGSTNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="GST Number"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:padding="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/rounded_corner_background_light"/>
-
-                <AutoCompleteTextView
-                    android:alpha="0.85"
-                    android:id="@+id/senderAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Address"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/black"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:padding="@dimen/_10sdp"
-                    android:background="@drawable/rounded_corner_background_light"/>
-                <AutoCompleteTextView
-                    android:alpha="0.85"
-                    android:id="@+id/senderTelephone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Address"
-                    android:textColorHint="@color/black"
-
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:padding="@dimen/_10sdp"
-                    android:background="@drawable/rounded_corner_background_light"/>
-                <AutoCompleteTextView
-                    android:alpha="0.85"
-                    android:id="@+id/senderEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Address"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:padding="@dimen/_10sdp"
-                    android:background="@drawable/rounded_corner_background_light"/>
-            </LinearLayout>
-
-
-            <!-- Invoice Details Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:padding="@dimen/_10sdp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Invoice Details"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="@dimen/_10sdp"/>
-
+                android:orientation="vertical">
+                <!-- Sender Details Section -->
                 <LinearLayout
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="@string/sender_segment"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="@dimen/_10sdp"/>
+
                     <AutoCompleteTextView
                         android:alpha="0.85"
-                        android:id="@+id/invoiceNumber"
+                        android:id="@+id/senderCompanyName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:hint="Invoice Number"
+                        android:hint="@string/company_name"
                         android:textColorHint="@color/black"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"
@@ -176,87 +94,194 @@
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:background="@drawable/rounded_corner_background_light"/>
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <AutoCompleteTextView
                         android:alpha="0.85"
-                        android:id="@+id/generateRandomNumber"
+                        android:id="@+id/senderGSTNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="7"
-                        android:text="Random"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/gst_number"
+                        android:textColorHint="@color/black"
                         android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:backgroundTint="@color/white"/>
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/senderAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/address"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/senderTelephone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/telephone_number"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/senderEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
                 </LinearLayout>
 
 
-                <AutoCompleteTextView
-                    android:alpha="0.85"
-                    android:id="@+id/placeOfSupply"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Place of Supply"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:padding="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/rounded_corner_background_light"/>
 
-                <AutoCompleteTextView
-                    android:alpha="0.85"
-                    android:id="@+id/reverseCharge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Reverse Charge"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:padding="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/rounded_corner_background_light"/>
+                <!-- Invoice Details Section -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:weightSum="10">
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:padding="@dimen/_10sdp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="Invoice Date"
+                        android:text="@string/invoice_details"
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:layout_marginBottom="@dimen/_10sdp"/>
-                    <DatePicker
-                        android:id="@+id/invoiceDatePicker"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:calendarViewShown="false"
-                        android:datePickerMode="spinner"/>
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <AutoCompleteTextView
+                            android:alpha="0.85"
+                            android:id="@+id/invoiceNumber"
+                            android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-,.!@%^*()"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="50"
+                            android:layout_weight="3"
+                            android:hint="@string/invoice_number"
+                            android:textColorHint="@color/black"
+                            android:textColor="@color/black"
+                            android:backgroundTint="@color/white"
+                            android:completionThreshold="1"
+                            android:padding="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@drawable/rounded_corner_background_light"/>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:alpha="0.85"
+                            android:id="@+id/generateRandomNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="7"
+                            android:text="@string/random"
+                            android:textColor="@color/black"
+                            android:padding="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:backgroundTint="@color/white"/>
+                    </LinearLayout>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/placeOfSupply"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/place_of_supply"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <AutoCompleteTextView
+                        android:alpha="0.85"
+                        android:id="@+id/reverseCharge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/reverse_charge"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"
+                        android:completionThreshold="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corner_background_light"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:text="@string/invoice_date"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_marginBottom="@dimen/_10sdp"/>
+                        <DatePicker
+                            android:background="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.85"
+                            android:datePickerMode="spinner"
+                            android:calendarViewShown="false"
+                            android:id="@+id/invoiceDatePicker"/>
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
+
+
+
 
 
             <!-- Recipient Details Section -->
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/recipientDetailsSectionLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:padding="@dimen/_10sdp"
-                 >
+                android:padding="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Recipient's Segment"
+                    android:text="@string/recipient_segment"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginBottom="@dimen/_10sdp"/>
@@ -271,7 +296,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="Billed To"
+                        android:text="@string/billed_to"
                         android:layout_marginBottom="@dimen/_10sdp"/>
 
                     <AutoCompleteTextView
@@ -279,8 +304,10 @@
                         android:id="@+id/billedToCompanyName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Company Name"
+                        android:hint="@string/company_name"
+                        android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM 1234567890-,.!@%^*()"
                         android:textColorHint="@color/black"
+                        android:maxLength="150"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"
                         android:completionThreshold="1"
@@ -293,7 +320,7 @@
                         android:id="@+id/billedToGSTNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="GST Number"
+                        android:hint="@string/gst_number"
                         android:textColorHint="@color/black"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"
@@ -307,7 +334,7 @@
                         android:id="@+id/billedToAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
+                        android:hint="@string/address"
                         android:textColorHint="@color/black"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"
@@ -325,7 +352,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="Shipped To"
+                        android:text="@string/shipped_to"
                         android:layout_marginBottom="@dimen/_10sdp"/>
 
                     <AutoCompleteTextView
@@ -333,7 +360,7 @@
                         android:id="@+id/shippedToCompanyName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Company Name"
+                        android:hint="@string/company_name"
                         android:textColorHint="@color/black"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"
@@ -347,7 +374,7 @@
                         android:id="@+id/shippedToGSTNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="GST Number"
+                        android:hint="@string/gst_number"
                         android:textColorHint="@color/black"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"
@@ -361,7 +388,7 @@
                         android:id="@+id/shippedToAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
+                        android:hint="@string/address"
                         android:textColorHint="@color/black"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"
@@ -371,21 +398,25 @@
                 </LinearLayout>
             </LinearLayout>
 
+
+
             <!-- Bank Details Section -->
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/bankDetailsSectionLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:padding="@dimen/_10sdp"
-                 >
+                android:padding="@dimen/_10sdp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Bank Details"
+                    android:text="@string/bank_details"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginBottom="@dimen/_10sdp"/>
@@ -395,7 +426,7 @@
                     android:id="@+id/cifNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="CIF Number"
+                    android:hint="@string/cif_number"
                     android:textColorHint="@color/black"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/white"
@@ -409,7 +440,7 @@
                     android:id="@+id/branchName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Branch Name"
+                    android:hint="@string/branch_name"
                     android:textColorHint="@color/black"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/white"
@@ -423,7 +454,7 @@
                     android:id="@+id/accountNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Account Number"
+                    android:hint="@string/account_number"
                     android:textColorHint="@color/black"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/white"
@@ -437,7 +468,7 @@
                     android:id="@+id/accountType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Account Type"
+                    android:hint="@string/account_type"
                     android:textColorHint="@color/black"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/white"
@@ -451,7 +482,7 @@
                     android:id="@+id/ifscCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="IFSC Code"
+                    android:hint="@string/ifsc_code"
                     android:textColorHint="@color/black"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/white"
@@ -460,8 +491,11 @@
                     android:background="@drawable/rounded_corner_background_light"/>
             </LinearLayout>
 
+
             <!-- Product List Section -->
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/productListSectionLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -474,7 +508,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Product List"
+                    android:text="@string/product_list"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginBottom="@dimen/_10sdp"/>
@@ -492,11 +526,12 @@
                     android:id="@+id/buttonAddProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Product"
+                    android:text="@string/add_product"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
                     android:padding="@dimen/_10sdp"/>
             </LinearLayout>
+
 
 
         </LinearLayout>
@@ -513,7 +548,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/_5sdp"
         android:id="@+id/next"
-        android:backgroundTint="@color/black"
         android:layout_gravity="bottom|right"
         android:padding="@dimen/_5sdp"
         tools:ignore="ContentDescription,RtlHardcoded" />
@@ -524,8 +558,8 @@
         app:fabSize="normal"
         android:layout_marginBottom="@dimen/_30sdp"
         android:layout_marginLeft="@dimen/_30sdp"
-        android:id="@+id/previous"
-        android:backgroundTint="@color/black"
+        android:id="@+id/prev"
+        android:visibility="gone"
         android:layout_gravity="bottom|left"
         android:padding="@dimen/_5sdp"
         android:layout_alignParentBottom="true"
@@ -537,11 +571,10 @@
         android:src="@drawable/baseline_add_24"
         app:fabSize="normal"
         android:layout_marginRight="@dimen/_30sdp"
-        android:id="@+id/add_new_invoice"
+        android:id="@+id/addNew"
         android:layout_above="@+id/next"
         android:layout_alignParentRight="true"
         android:layout_alignBaseline="@+id/next"
-        android:backgroundTint="@color/black"
         android:padding="@dimen/_5sdp"
         tools:ignore="ContentDescription,RtlHardcoded" />
 </RelativeLayout>

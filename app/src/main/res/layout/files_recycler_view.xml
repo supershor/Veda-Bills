@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#00000000"
+    android:padding="@dimen/_10sdp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:alpha=".85"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/rounded_corner_background_light"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:alpha="0.85"
+                android:id="@+id/invoiceName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/invoice_name"
+                android:textSize="@dimen/_16ssp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/white"
+                android:completionThreshold="1"
+                android:padding="@dimen/_10sdp" />
+
+            <ImageButton
+                android:alpha="0.85"
+                android:src="@drawable/baseline_link_24"
+                android:id="@+id/generateRandomNumber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:textColor="@color/black"
+                android:padding="@dimen/_10sdp"
+                android:backgroundTint="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:alpha="0.85"
+                android:id="@+id/invoiceSent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/invoice_sent_to"
+                android:textSize="@dimen/_12ssp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/white"
+                android:completionThreshold="1"
+                android:padding="@dimen/_10sdp" />
+
+            <TextView
+                android:alpha="0.85"
+                android:id="@+id/invoiceDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/invoice_dated"
+                android:textSize="@dimen/_12ssp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/white"
+                android:completionThreshold="1"
+                android:padding="@dimen/_10sdp" />
+
+            <ImageButton
+                android:alpha="0.85"
+                android:src="@drawable/baseline_drive_file_move_24"
+                android:id="@+id/shareFile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:padding="@dimen/_10sdp"
+                android:backgroundTint="@color/white"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

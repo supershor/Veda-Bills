@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/input_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_description" />
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/input_hsn_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_hsn_code" />
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/input_unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_unit" />
+
+        <EditText
+            android:inputType="numberDecimal"
+            android:id="@+id/input_mrp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_mrp" />
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/input_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_quantity" />
+
+        <EditText
+            android:inputType="numberDecimal"
+            android:id="@+id/input_list_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_list_price" />
+
+        <EditText
+            android:inputType="numberDecimal"
+            android:id="@+id/input_discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_discount" />
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/input_cgst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_cgst" />
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/input_sgst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_sgst" />
+</LinearLayout>

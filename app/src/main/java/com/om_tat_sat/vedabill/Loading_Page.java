@@ -1,34 +1,45 @@
 package com.om_tat_sat.vedabill;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
+import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.om_tat_sat.vedabill.Adapters.SimpleTextWatcher;
+
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class Loading_Page extends AppCompatActivity {
 
+    private LottieAnimationView verifyAnim;
     private static final String TAG = "Loading_Page";
-    private static final int RC_SIGN_IN = 9001;  // Request code for Google Sign-In
-    private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    private String mVerificationId;
+    SharedPreferences app_language;
+    int language = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +50,72 @@ public class Loading_Page extends AppCompatActivity {
         // Initialize Firebase Auth
         Log.d(TAG, "Initializing Firebase Auth");
         mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(Loading_Page.this, MainActivity.class));
+            finish();
+        }
 
-        // Setup Google Sign-In options
+        // Initialize SharedPreferences for language selection
+        app_language = getSharedPreferences("app_language", MODE_PRIVATE);
+        language = app_language.getInt("current_language", 0);
 
-        Log.d(TAG, "Setting up Google Sign-In options");
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken("48175944108-kr743i46hijkr1r6tbd3mvdf01taplpj.apps.googleusercontent.com")
-//                .requestEmail()
-//                .build();
+        // Initialize UI elements
+        EditText phoneNumberField = findViewById(R.id.phone_number);
+        EditText otpCodeField = findViewById(R.id.otp_code);
+        phoneNumberField.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+                findViewById(R.id.loading_page_phoneNumber).setVisibility(View.VISIBLE);
+            }
+        });
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                  .requestIdToken("48175944108-0agibikvvmchukk2qffal09otmqeng62.apps.googleusercontent.com")
-                  .requestEmail()
-                  .build();
-        // Build a GoogleSignInClient with the options specified by gso.
-        Log.d(TAG, "Building GoogleSignInClient");
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        verifyAnim = findViewById(R.id.verifyAnim);
+        findViewById(R.id.loading_page_phoneNumber).setOnClickListener(v -> {
+            String phoneNumber = "+91" + phoneNumberField.getText().toString().replace("+91","");
+            verifyAnim.setVisibility(View.VISIBLE);
+            findViewById(R.id.loading_page_phoneNumber).setVisibility(View.GONE);
+            startPhoneNumberVerification(phoneNumber);
+        });
+
+        findViewById(R.id.verify_button).setOnClickListener(v -> {
+            String code = otpCodeField.getText().toString();
+            if (!code.isEmpty()) {
+                verifyPhoneNumberWithCode(mVerificationId, code);
+            } else {
+                Toast.makeText(Loading_Page.this, this.getString(R.string.enter_otp_code), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Initialize callbacks for phone authentication
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
+                verifyAnim.setVisibility(View.GONE);
+                findViewById(R.id.loading_page_phoneNumber).setVisibility(View.GONE);
+                Log.d(TAG, "onVerificationCompleted:" + credential);
+                signInWithPhoneAuthCredential(credential);
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                verifyAnim.setVisibility(View.GONE);
+                findViewById(R.id.loading_page_phoneNumber).setVisibility(View.VISIBLE);
+                Log.w(TAG, "onVerificationFailed", e);
+                Toast.makeText(Loading_Page.this, Loading_Page.this.getString(R.string.verification_failed), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                verifyAnim.setVisibility(View.GONE);
+                Log.d(TAG, "onCodeSent:" + verificationId);
+                mVerificationId = verificationId;
+                findViewById(R.id.otp_code).setVisibility(View.VISIBLE);
+                findViewById(R.id.loading_page_phoneNumber).setVisibility(View.GONE);
+                findViewById(R.id.verify_button).setVisibility(View.VISIBLE);
+                Toast.makeText(Loading_Page.this, Loading_Page.this.getString(R.string.otp_sent), Toast.LENGTH_SHORT).show();
+            }
+        };
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -62,60 +123,88 @@ public class Loading_Page extends AppCompatActivity {
             Log.d(TAG, "Applying window insets");
             return insets;
         });
-
-        // Set up Google Sign-In button click listener
-        Log.d(TAG, "Setting up Google Sign-In button click listener");
-        findViewById(R.id.loading_page_google).setOnClickListener(v -> signInWithGoogle());
     }
 
-    private void signInWithGoogle() {
-        Log.d(TAG, "Google Sign-In button clicked");
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        Log.d(TAG, "Starting Google Sign-In intent");
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+    private void startPhoneNumberVerification(String phoneNumber) {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,
+                60,
+                TimeUnit.SECONDS,
+                this,
+                mCallbacks);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
-
-        if (requestCode == RC_SIGN_IN) {
-            Log.d(TAG, "Handling Google Sign-In result");
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        } else {
-            Log.w(TAG, "Unhandled requestCode: " + requestCode);
-        }
+    private void verifyPhoneNumberWithCode(String verificationId, String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+        signInWithPhoneAuthCredential(credential);
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Log.d(TAG, "Google Sign-In successful: " + account.getEmail());
-            firebaseAuthWithGoogle(account.getIdToken());
-        } catch (ApiException e) {
-            Log.w(TAG, "Google Sign-In failed with status code: " + e.getStatusCode(), e);
-        }
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        Log.d(TAG, "Authenticating with Firebase using Google token");
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
-                        // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Log.d(TAG, "Firebase user: " + user.getEmail());
+                        FirebaseUser user = task.getResult().getUser();
+                        assert user != null;
+                        Log.d(TAG, "Firebase user: " + user.getPhoneNumber());
                         // Show a toast message
                         Toast.makeText(Loading_Page.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                        // Show language selection dialog
+                        showLanguageSelectionDialog();
                     } else {
+                        verifyAnim.setVisibility(View.GONE);
+                        findViewById(R.id.loading_page_phoneNumber).setVisibility(View.VISIBLE);
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        // Show a toast message
-                        Toast.makeText(Loading_Page.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Loading_Page.this, Loading_Page.this.getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void showLanguageSelectionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Language");
+
+        String[] languages = {"English", "Hindi"};
+        int checkedItem = language;
+
+        builder.setSingleChoiceItems(languages, checkedItem, (dialog, which) -> language = which);
+
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            SharedPreferences.Editor editor = app_language.edit();
+            editor.putInt("current_language", language);
+            editor.apply();
+            applyLanguage();
+            navigateToMainActivity();
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            dialog.dismiss();
+            navigateToMainActivity();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void applyLanguage() {
+        if (language == 0) {
+            change_language("en");
+        } else if (language == 1) {
+            change_language("hi");
+        }
+    }
+
+    private void navigateToMainActivity() {
+        startActivity(new Intent(Loading_Page.this, MainActivity.class));
+        finish();
+    }
+
+    public void change_language(String language) {
+        Resources resources = this.getResources();
+        Configuration configuration = resources.getConfiguration();
+        Locale locale = new Locale(language);
+        locale.setDefault(locale);
+        configuration.setLocale(locale);
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 }

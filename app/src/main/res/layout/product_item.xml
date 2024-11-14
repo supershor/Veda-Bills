@@ -8,10 +8,11 @@
 
     <AutoCompleteTextView
         android:alpha="0.85"
+        android:completionThreshold="1"
         android:id="@+id/editDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"
+        android:hint="@string/hint_description"
         android:background="@drawable/rounded_corner_background_light"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
@@ -26,14 +27,14 @@
         android:weightSum="2">
         <AutoCompleteTextView
             android:alpha="0.85"
-
+            android:inputType="text"
             android:id="@+id/editHSNCode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/_5sdp"
 
-            android:hint="HSN Code"
+            android:hint="@string/hint_hsn_code"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:background="@drawable/rounded_corner_background_light"
@@ -42,13 +43,14 @@
             android:layout_marginBottom="@dimen/_10sdp"/>
         <AutoCompleteTextView
             android:alpha="0.85"
+            android:inputType="text"
 
             android:id="@+id/editUnit"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Unit"
+            android:hint="@string/hint_unit"
             android:background="@drawable/rounded_corner_background_light"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
@@ -69,8 +71,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="MRP"
+            android:hint="@string/hint_mrp"
             android:alpha="0.85"
+            android:inputType="numberDecimal"
 
             android:textColorHint="@color/black"
             android:layout_marginEnd="@dimen/_5sdp"
@@ -87,9 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner_background_light"
-            android:hint="Quantity"
+            android:hint="@string/hint_quantity"
             android:layout_marginStart="@dimen/_5sdp"
-
             android:inputType="number"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
@@ -108,10 +110,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:alpha="0.85"
+            android:inputType="numberDecimal"
 
             android:background="@drawable/rounded_corner_background_light"
             android:layout_weight="1"
-            android:hint="List Price"
+            android:hint="@string/hint_list_price"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:layout_marginEnd="@dimen/_5sdp"
@@ -123,8 +126,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Disc."
+            android:hint="@string/hint_discount"
             android:textColorHint="@color/black"
+            android:inputType="numberDecimal"
+
             android:textColor="@color/black"
             android:backgroundTint="@color/white"
             android:padding="@dimen/_10sdp"
@@ -141,29 +146,37 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2">
-        <Spinner
-            android:id="@+id/spinnerCGST"
+
+        <AutoCompleteTextView
+            android:digits="1234567890"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/cgst_sgst_array"
             android:alpha="0.85"
-
-            android:backgroundTint="@color/white"
+            android:inputType="numberDecimal"
+            android:id="@+id/spinnerCGST"
             android:background="@drawable/rounded_corner_background_light"
+            android:layout_weight="1"
+            android:hint="@string/hint_cgst"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:layout_marginEnd="@dimen/_5sdp"
+            android:backgroundTint="@color/white"
             android:padding="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"/>
-        <Spinner
-            android:id="@+id/spinnerSGST"
+        <AutoCompleteTextView
+            android:digits="1234567890"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_weight="1"
             android:alpha="0.85"
-            android:backgroundTint="@color/white"
+            android:inputType="numberDecimal"
+            android:id="@+id/spinnerSGST"
             android:background="@drawable/rounded_corner_background_light"
-            android:entries="@array/cgst_sgst_array"
+            android:layout_weight="1"
+            android:hint="@string/hint_sgst"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:backgroundTint="@color/white"
             android:padding="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"/>
     </LinearLayout>
