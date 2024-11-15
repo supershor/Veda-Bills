@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -453,6 +454,53 @@ public class addNewInvoiceData extends AppCompatActivity {
                         accountNumber.setText(bankDataMap.get(selectedCif).get("accountNumber"));
                         accountType.setText(bankDataMap.get(selectedCif).get("accountType"));
                         ifscCode.setText(bankDataMap.get(selectedCif).get("ifscCode"));
+                    }
+                });
+                branchName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedBranch = branchAdapter.getItem(position);
+                        for(String key:bankDataMap.keySet()){
+                            if(bankDataMap.get(key).get("branchName").equals(selectedBranch)){
+                                cifNumber.setText(key);
+                                accountNumber.setText(bankDataMap.get(key).get("accountNumber"));
+                                accountType.setText(bankDataMap.get(key).get("accountType"));
+                                ifscCode.setText(bankDataMap.get(key).get("ifscCode"));
+                            }
+                        }
+                    }
+                });
+                accountNumber.setOnItemClickListener((parent, view, position, id) -> {
+                    String selectedAccount = accountAdapter.getItem(position);
+                    for(String key:bankDataMap.keySet()){
+                        if(bankDataMap.get(key).get("accountNumber").equals(selectedAccount)) {
+                            cifNumber.setText(key);
+                            branchName.setText(bankDataMap.get(key).get("branchName"));
+                            accountType.setText(bankDataMap.get(key).get("accountType"));
+                            ifscCode.setText(bankDataMap.get(key).get("ifscCode"));
+                        }
+                    }
+                });
+                accountType.setOnItemClickListener((parent, view, position, id) -> {
+                    String selectedAccountType = accountTypeAdapter.getItem(position);
+                    for(String key:bankDataMap.keySet()){
+                        if(bankDataMap.get(key).get("accountType").equals(selectedAccountType)) {
+                            cifNumber.setText(key);
+                            branchName.setText(bankDataMap.get(key).get("branchName"));
+                            accountNumber.setText(bankDataMap.get(key).get("accountNumber"));
+                            ifscCode.setText(bankDataMap.get(key).get("ifscCode"));
+                        }
+                    }
+                });
+                ifscCode.setOnItemClickListener((parent, view, position, id) -> {
+                    String selectedIfsc = ifscAdapter.getItem(position);
+                    for (String key : bankDataMap.keySet()) {
+                        if (bankDataMap.get(key).get("ifscCode").equals(selectedIfsc)) {
+                            cifNumber.setText(key);
+                            branchName.setText(bankDataMap.get(key).get("branchName"));
+                            accountNumber.setText(bankDataMap.get(key).get("accountNumber"));
+                            accountType.setText(bankDataMap.get(key).get("accountType"));
+                        }
                     }
                 });
             }

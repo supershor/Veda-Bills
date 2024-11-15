@@ -104,6 +104,24 @@ public class MainActivity extends AppCompatActivity {
         Log.e("Adapter Set", "PDF Adapter is set with " + pdfFiles.size() + " items.");
     }
 
+//    private List<File> loadPdfFiles() {
+//        // Load PDF files from the external files directory
+//        List<File> files = new ArrayList<>();
+//        File dir = getExternalFilesDir(null);
+//
+//        Log.e("loadPdfFiles: Directory", (dir != null) ? dir.toString() : "Directory is null");
+//
+//        if (dir != null && dir.exists()) {
+//            File[] pdfFiles = dir.listFiles((d, name) -> name.endsWith(".pdf"));
+//            if (pdfFiles != null) {
+//                for (File file : pdfFiles) {
+//                    files.add(file);
+//                }
+//            }
+//        }
+//        Log.e("loadPdfFiles: Files", files.toString());
+//        return files;
+//    }
     private List<File> loadPdfFiles() {
         // Load PDF files from the external files directory
         List<File> files = new ArrayList<>();
@@ -117,11 +135,14 @@ public class MainActivity extends AppCompatActivity {
                 for (File file : pdfFiles) {
                     files.add(file);
                 }
+                // Sort the files by last modified date in descending order
+                files.sort((file1, file2) -> Long.compare(file2.lastModified(), file1.lastModified()));
             }
         }
         Log.e("loadPdfFiles: Files", files.toString());
         return files;
     }
+
 
     private void applyLanguage() {
         if (language == 0) {

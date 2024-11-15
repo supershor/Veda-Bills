@@ -255,7 +255,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
         });
 
-
+        holder.spinnerCGST.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+                updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
+            }
+        });
+        holder.spinnerSGST.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+                updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
+            }
+        });
 
         holder.spinnerSGST.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

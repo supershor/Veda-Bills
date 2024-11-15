@@ -44,8 +44,8 @@
     <string name="hint_quantity">Quantity</string>
     <string name="hint_list_price">List Price</string>
     <string name="hint_discount">Discount</string>
-    <string name="hint_cgst">CGST</string>
-    <string name="hint_sgst">SGST</string>
+    <string name="hint_cgst">CGST%</string>
+    <string name="hint_sgst">SGST%</string>
     <string name="dated">"Dated: "</string>
     <string name="sent_to">"Sent to: "</string>
     <string name="no_application_available">No application available to view PDF</string>
