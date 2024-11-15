@@ -8,12 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -26,6 +24,7 @@ import com.om_tat_sat.vedabill.Adapters.PdfAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -132,9 +131,7 @@ public class MainActivity extends AppCompatActivity {
         if (dir != null && dir.exists()) {
             File[] pdfFiles = dir.listFiles((d, name) -> name.endsWith(".pdf"));
             if (pdfFiles != null) {
-                for (File file : pdfFiles) {
-                    files.add(file);
-                }
+                files.addAll(Arrays.asList(pdfFiles));
                 // Sort the files by last modified date in descending order
                 files.sort((file1, file2) -> Long.compare(file2.lastModified(), file1.lastModified()));
             }

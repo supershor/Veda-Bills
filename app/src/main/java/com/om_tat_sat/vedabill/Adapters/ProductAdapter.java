@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,15 +20,15 @@ import com.om_tat_sat.vedabill.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private List<ProductItem> productList;
-    private Context context;
-    private HashMap<String, HashMap<String, String>> itemsDataMap;
-    private List<ProductItem> updatedProductList;
+    private final List<ProductItem> productList;
+    private final Context context;
+    private final HashMap<String, HashMap<String, String>> itemsDataMap;
+    private final List<ProductItem> updatedProductList;
 
     public ProductAdapter(Context context, List<ProductItem> productList, HashMap<String, HashMap<String, String>> itemsDataMap, List<ProductItem> updatedProductList) {
         this.context = context;
@@ -55,80 +54,68 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.editQuantity.setText(product.getQuantity());
         holder.editListPrice.setText(product.getListPrice());
         holder.editDiscount.setText(product.getDiscount());
-
-
-
         ArrayAdapter<String> descriptionAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("description"));
         holder.editDescription.setAdapter(descriptionAdapter);
-
         ArrayAdapter<String> hsnCodeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("hsnCode"));
         holder.editHSNCode.setAdapter(hsnCodeAdapter);
-
         ArrayAdapter<String> unitAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("unit"));
         holder.editUnit.setAdapter(unitAdapter);
-
         ArrayAdapter<String> mrpAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("mrp"));
         holder.editMRP.setAdapter(mrpAdapter);
-
         ArrayAdapter<String> quantityAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("quantity"));
         holder.editQuantity.setAdapter(quantityAdapter);
-
         ArrayAdapter<String> listPriceAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("listPrice"));
         holder.editListPrice.setAdapter(listPriceAdapter);
-
         ArrayAdapter<String> discountAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("discount"));
         holder.editDiscount.setAdapter(discountAdapter);
         holder.spinnerCGST.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("cgst")));
         holder.spinnerSGST.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line, extractAttributeList("sgst")));
-
         holder.editDescription.setOnItemClickListener((parent, view, pos, id) -> {
             String selectedDescription = descriptionAdapter.getItem(pos);
             Log.e("onBindViewHolder: ",selectedDescription+"-------------");
             for (String key:itemsDataMap.keySet()) {
-                if (itemsDataMap.get(key).get("description").equals(selectedDescription)) {
-                    holder.editHSNCode.setText(itemsDataMap.get(key).get("hsnCode"));
-                    holder.editUnit.setText(itemsDataMap.get(key).get("unit"));
-                    holder.editMRP.setText(itemsDataMap.get(key).get("mrp"));
-                    holder.editQuantity.setText(itemsDataMap.get(key).get("quantity"));
-                    holder.editListPrice.setText(itemsDataMap.get(key).get("listPrice"));
-                    holder.editDiscount.setText(itemsDataMap.get(key).get("discount"));
-                    holder.spinnerCGST.setText(itemsDataMap.get(key).get("cgst"));
-                    holder.spinnerSGST.setText(itemsDataMap.get(key).get("sgst"));
+                if (Objects.equals(Objects.requireNonNull(itemsDataMap.get(key)).get("description"), selectedDescription)) {
+                    holder.editHSNCode.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("hsnCode"));
+                    holder.editUnit.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("unit"));
+                    holder.editMRP.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("mrp"));
+                    holder.editQuantity.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("quantity"));
+                    holder.editListPrice.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("listPrice"));
+                    holder.editDiscount.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("discount"));
+                    holder.spinnerCGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("cgst"));
+                    holder.spinnerSGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("sgst"));
                     updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
                 }
             }
         });
-
         holder.editHSNCode.setOnItemClickListener((parent, view, pos, id) -> {
             String selectedHSNCode = hsnCodeAdapter.getItem(pos);
             for (String key : itemsDataMap.keySet()) {
-                if (itemsDataMap.get(key).get("hsnCode").equals(selectedHSNCode)) {
-                    holder.editDescription.setText(itemsDataMap.get(key).get("description"));
-                    holder.editUnit.setText(itemsDataMap.get(key).get("unit"));
-                    holder.editMRP.setText(itemsDataMap.get(key).get("mrp"));
-                    holder.editQuantity.setText(itemsDataMap.get(key).get("quantity"));
-                    holder.editListPrice.setText(itemsDataMap.get(key).get("listPrice"));
-                    holder.editDiscount.setText(itemsDataMap.get(key).get("discount"));
-                    holder.spinnerCGST.setText(itemsDataMap.get(key).get("cgst"));
-                    holder.spinnerSGST.setText(itemsDataMap.get(key).get("sgst"));
+                if (Objects.equals(Objects.requireNonNull(itemsDataMap.get(key)).get("hsnCode"), selectedHSNCode)) {
+                    holder.editDescription.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("description"));
+                    holder.editUnit.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("unit"));
+                    holder.editMRP.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("mrp"));
+                    holder.editQuantity.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("quantity"));
+                    holder.editListPrice.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("listPrice"));
+                    holder.editDiscount.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("discount"));
+                    holder.spinnerCGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("cgst"));
+                    holder.spinnerSGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("sgst"));
                     updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
                     break;
                 }
             }
         });
-
         holder.editUnit.setOnItemClickListener((parent, view, pos, id) -> {
             String selectedUnit = unitAdapter.getItem(pos);
             for (String key : itemsDataMap.keySet()) {
-                if (itemsDataMap.get(key).get("unit").equals(selectedUnit)) {
-                    holder.editDescription.setText(itemsDataMap.get(key).get("description"));
-                    holder.editHSNCode.setText(itemsDataMap.get(key).get("hsnCode"));
-                    holder.editMRP.setText(itemsDataMap.get(key).get("mrp"));
-                    holder.editQuantity.setText(itemsDataMap.get(key).get("quantity"));
-                    holder.editListPrice.setText(itemsDataMap.get(key).get("listPrice"));
-                    holder.editDiscount.setText(itemsDataMap.get(key).get("discount"));
-                    holder.spinnerCGST.setText(itemsDataMap.get(key).get("cgst"));
-                    holder.spinnerSGST.setText(itemsDataMap.get(key).get("sgst"));
+                if (Objects.equals(Objects.requireNonNull(itemsDataMap.get(key)).get("unit"), selectedUnit)) {
+                    holder.editDescription.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("description"));
+                    holder.editHSNCode.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("hsnCode"));
+                    holder.editMRP.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("mrp"));
+                    holder.editQuantity.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("quantity"));
+                    holder.editListPrice.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("listPrice"));
+                    holder.editDiscount.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("discount"));
+                    holder.spinnerCGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("cgst"));
+                    holder.spinnerSGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("sgst"));
                     updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
                     break;
                 }
@@ -137,15 +124,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.editMRP.setOnItemClickListener((parent, view, pos, id) -> {
             String selectedMRP = mrpAdapter.getItem(pos);
             for (String key : itemsDataMap.keySet()) {
-                if (itemsDataMap.get(key).get("mrp").equals(selectedMRP)) {
-                    holder.editDescription.setText(itemsDataMap.get(key).get("description"));
-                    holder.editHSNCode.setText(itemsDataMap.get(key).get("hsnCode"));
-                    holder.editUnit.setText(itemsDataMap.get(key).get("unit"));
-                    holder.editQuantity.setText(itemsDataMap.get(key).get("quantity"));
-                    holder.editListPrice.setText(itemsDataMap.get(key).get("listPrice"));
-                    holder.editDiscount.setText(itemsDataMap.get(key).get("discount"));
-                    holder.spinnerCGST.setText(itemsDataMap.get(key).get("cgst"));
-                    holder.spinnerSGST.setText(itemsDataMap.get(key).get("sgst"));
+                if (Objects.equals(Objects.requireNonNull(itemsDataMap.get(key)).get("mrp"), selectedMRP)) {
+                    holder.editDescription.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("description"));
+                    holder.editHSNCode.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("hsnCode"));
+                    holder.editUnit.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("unit"));
+                    holder.editQuantity.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("quantity"));
+                    holder.editListPrice.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("listPrice"));
+                    holder.editDiscount.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("discount"));
+                    holder.spinnerCGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("cgst"));
+                    holder.spinnerSGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("sgst"));
                     updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
                     break;
                 }
@@ -154,15 +141,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.editQuantity.setOnItemClickListener((parent, view, pos, id) -> {
             String selectedQuantity = quantityAdapter.getItem(pos);
             for (String key : itemsDataMap.keySet()) {
-                if (itemsDataMap.get(key).get("quantity").equals(selectedQuantity)) {
-                    holder.editDescription.setText(itemsDataMap.get(key).get("description"));
-                    holder.editHSNCode.setText(itemsDataMap.get(key).get("hsnCode"));
-                    holder.editUnit.setText(itemsDataMap.get(key).get("unit"));
-                    holder.spinnerCGST.setText(itemsDataMap.get(key).get("cgst"));
-                    holder.spinnerSGST.setText(itemsDataMap.get(key).get("sgst"));
-                    holder.editMRP.setText(itemsDataMap.get(key).get("mrp"));
-                    holder.editListPrice.setText(itemsDataMap.get(key).get("listPrice"));
-                    holder.editDiscount.setText(itemsDataMap.get(key).get("discount"));
+                if (Objects.equals(Objects.requireNonNull(itemsDataMap.get(key)).get("quantity"), selectedQuantity)) {
+                    holder.editDescription.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("description"));
+                    holder.editHSNCode.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("hsnCode"));
+                    holder.editUnit.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("unit"));
+                    holder.spinnerCGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("cgst"));
+                    holder.spinnerSGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("sgst"));
+                    holder.editMRP.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("mrp"));
+                    holder.editListPrice.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("listPrice"));
+                    holder.editDiscount.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("discount"));
                     updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
                     break;
                 }
@@ -171,15 +158,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.editListPrice.setOnItemClickListener((parent, view, pos, id) -> {
             String selectedListPrice = listPriceAdapter.getItem(pos);
             for (String key : itemsDataMap.keySet()) {
-                if (itemsDataMap.get(key).get("listPrice").equals(selectedListPrice)) {
-                    holder.editDescription.setText(itemsDataMap.get(key).get("description"));
-                    holder.editHSNCode.setText(itemsDataMap.get(key).get("hsnCode"));
-                    holder.editUnit.setText(itemsDataMap.get(key).get("unit"));
-                    holder.editMRP.setText(itemsDataMap.get(key).get("mrp"));
-                    holder.spinnerCGST.setText(itemsDataMap.get(key).get("cgst"));
-                    holder.spinnerSGST.setText(itemsDataMap.get(key).get("sgst"));
-                    holder.editQuantity.setText(itemsDataMap.get(key).get("quantity"));
-                    holder.editDiscount.setText(itemsDataMap.get(key).get("discount"));
+                if (Objects.equals(Objects.requireNonNull(itemsDataMap.get(key)).get("listPrice"), selectedListPrice)) {
+                    holder.editDescription.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("description"));
+                    holder.editHSNCode.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("hsnCode"));
+                    holder.editUnit.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("unit"));
+                    holder.editMRP.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("mrp"));
+                    holder.spinnerCGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("cgst"));
+                    holder.spinnerSGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("sgst"));
+                    holder.editQuantity.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("quantity"));
+                    holder.editDiscount.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("discount"));
                     updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
                     break;
                 }
@@ -188,23 +175,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.editDiscount.setOnItemClickListener((parent, view, pos, id) -> {
             String selectedDiscount = discountAdapter.getItem(pos);
             for (String key : itemsDataMap.keySet()) {
-                if (itemsDataMap.get(key).get("discount").equals(selectedDiscount)) {
-                    holder.editDescription.setText(itemsDataMap.get(key).get("description"));
-                    holder.editHSNCode.setText(itemsDataMap.get(key).get("hsnCode"));
-                    holder.editUnit.setText(itemsDataMap.get(key).get("unit"));
-                    holder.spinnerCGST.setText(itemsDataMap.get(key).get("cgst"));
-                    holder.spinnerSGST.setText(itemsDataMap.get(key).get("sgst"));
-                    holder.editMRP.setText(itemsDataMap.get(key).get("mrp"));
-                    holder.editQuantity.setText(itemsDataMap.get(key).get("quantity"));
-                    holder.editListPrice.setText(itemsDataMap.get(key).get("listPrice"));
+                if (Objects.equals(Objects.requireNonNull(itemsDataMap.get(key)).get("discount"), selectedDiscount)) {
+                    holder.editDescription.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("description"));
+                    holder.editHSNCode.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("hsnCode"));
+                    holder.editUnit.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("unit"));
+                    holder.spinnerCGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("cgst"));
+                    holder.spinnerSGST.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("sgst"));
+                    holder.editMRP.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("mrp"));
+                    holder.editQuantity.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("quantity"));
+                    holder.editListPrice.setText(Objects.requireNonNull(itemsDataMap.get(key)).get("listPrice"));
                     updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
                     break;
                 }
             }
         });
-
-
-        // Ensure data is captured even if user manually edits text
         holder.editDiscount.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -254,7 +238,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
             }
         });
-
         holder.spinnerCGST.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -269,7 +252,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
             }
         });
-
         holder.spinnerSGST.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -293,37 +275,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             }
         });
-
-        //TODO add selected listeners and auto set on them here
-
     }
-    private void updateAllFieldsBasedOnSelection(ProductViewHolder holder, String selectedValue, String key) {
-        for (String datasetKey : itemsDataMap.keySet()) {
-            Map<String, String> attributes = itemsDataMap.get(datasetKey);
-            if (attributes != null && attributes.get(key).equals(selectedValue)) {
-                holder.editDescription.setText(attributes.getOrDefault("description", ""));
-                holder.editHSNCode.setText(attributes.getOrDefault("hsnCode", ""));
-                holder.editUnit.setText(attributes.getOrDefault("unit", ""));
-                holder.editMRP.setText(attributes.getOrDefault("mrp", ""));
-                holder.editListPrice.setText(attributes.getOrDefault("listPrice", ""));
-                holder.spinnerCGST.setText(attributes.getOrDefault("cgst", "0"));
-                holder.spinnerSGST.setText(attributes.getOrDefault("sgst", "0"));
-                updateProductListWithSelectedValues(holder, holder.getAdapterPosition());
-                break;
-            }
-        }
-    }
-
-    // Helper method to get index of an item in a spinner
-    private int getIndex(Spinner spinner, String value) {
-        for (int i = 0; i < spinner.getCount(); i++) {
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)) {
-                return i;
-            }
-        }
-        return 0; // Default selection if not found
-    }
-
     private List<String> extractAttributeList(String attribute) {
         List<String> attributeList = new ArrayList<>();
         for (HashMap<String, String> itemData : itemsDataMap.values()) {
@@ -331,12 +283,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
         return attributeList;
     }
-
     @Override
     public int getItemCount() {
         return productList.size();
     }
-
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         AutoCompleteTextView editDescription, editHSNCode, editUnit, editMRP, editQuantity, editListPrice, editDiscount,spinnerCGST, spinnerSGST;
         public ProductViewHolder(@NonNull View itemView) {
@@ -352,31 +302,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             spinnerSGST = itemView.findViewById(R.id.spinnerSGST);
         }
     }
-
     public void addProduct(ProductItem product) {
         productList.add(product);
         notifyItemInserted(productList.size() - 1);
     }
-
-    public List<ProductItem> getProductList() {
-        List<ProductItem> updatedProductList = new ArrayList<>();
-        for (int i = 0; i < getItemCount(); i++) {
-            ProductItem product = productList.get(i);
-            updatedProductList.add(new ProductItem(
-                    product.getDescription(),
-                    product.getHsnCode(),
-                    product.getUnit(),
-                    product.getMrp(),
-                    product.getQuantity(),
-                    product.getListPrice(),
-                    product.getDiscount(),
-                    String.valueOf(product.getCgst()),
-                    String.valueOf(product.getSgst())
-            ));
-        }
-        return updatedProductList;
-    }
-
     public void updateExternalProductList(int position, ProductItem product) {
         if (position < updatedProductList.size()) {
             updatedProductList.set(position, product);
@@ -384,9 +313,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             updatedProductList.add(product);
         }
     }
-
-
-    // Helper method to update product list
     private void updateProductListWithSelectedValues(ProductViewHolder holder, int position) {
         ProductItem updatedProduct = new ProductItem(
                 holder.editDescription.getText().toString(),
@@ -401,6 +327,4 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         );
         updateExternalProductList(position, updatedProduct);
     }
-
-
 }

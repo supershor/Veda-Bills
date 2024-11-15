@@ -154,6 +154,7 @@
             android:alpha="0.85"
             android:inputType="numberDecimal"
             android:id="@+id/spinnerCGST"
+            android:maxLength="2"
             android:background="@drawable/rounded_corner_background_light"
             android:layout_weight="1"
             android:hint="@string/hint_cgst"
@@ -166,6 +167,7 @@
         <AutoCompleteTextView
             android:digits="1234567890"
             android:layout_width="0dp"
+            android:maxLength="2"
             android:layout_height="wrap_content"
             android:alpha="0.85"
             android:inputType="numberDecimal"

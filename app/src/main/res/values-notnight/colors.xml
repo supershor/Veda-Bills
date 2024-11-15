@@ -2,7 +2,4 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blue">#C1E3FF</color>
-    <color name="purple">#00072D</color>
-    <color name="date_picker_text_color">#000000</color> <!-- Black for light mode -->
 </resources>

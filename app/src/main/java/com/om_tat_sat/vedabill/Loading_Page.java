@@ -1,6 +1,5 @@
 package com.om_tat_sat.vedabill;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -203,7 +202,7 @@ public class Loading_Page extends AppCompatActivity {
         Resources resources = this.getResources();
         Configuration configuration = resources.getConfiguration();
         Locale locale = new Locale(language);
-        locale.setDefault(locale);
+        Locale.setDefault(locale);
         configuration.setLocale(locale);
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
     }
