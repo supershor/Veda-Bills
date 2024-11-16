@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:\\Users\\ashis\\OneDrive\\Documents\\Android keys\\vedaBills.jks")
+            storePassword = "ashish72240"
+            keyAlias = "key0"
+            keyPassword = "ashish72240"
+        }
+    }
     namespace = "com.om_tat_sat.vedabill"
     compileSdk = 34
     bundle{
@@ -16,8 +24,8 @@ android {
         applicationId = "com.om_tat_sat.vedabill"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 4
+        versionName = "4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,6 +37,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
