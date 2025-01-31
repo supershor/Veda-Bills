@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import android.os.Environment;
+import java.io.File;
+
 
 public class addNewInvoiceData extends AppCompatActivity {
 
@@ -101,8 +105,9 @@ public class addNewInvoiceData extends AppCompatActivity {
     private List<ProductItem> productList;
     private HashMap<String, HashMap<String, String>> itemsDataMap;
     private DatabaseReference databaseReferenceItems;
-    private DatabaseReference databaseReferenceInformation;
+    private DatabaseReference databaseReferencePdfs;
     private DatabaseReference databaseReferenceBankDetails;
+    private DatabaseReference databaseReferenceInformation;
     private String userId;
     private String fileNameMainFile;
 
@@ -888,7 +893,14 @@ public class addNewInvoiceData extends AppCompatActivity {
             File pdfFile = new File(getExternalFilesDir(null), fullFileName);
             try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
                 fos.write(pdfData);
-                Toast.makeText(this, "PDF saved: " + pdfFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "PDF saved in phone: " + pdfFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                databaseReferencePdfs=FirebaseDatabase.getInstance().getReference("VedaBills").child(userId).child("pdfs");
+                databaseReferencePdfs.push().setValue(fullFileName).addOnSuccessListener(aVoid -> {
+                            Toast.makeText(this, "PDF saved in database", Toast.LENGTH_LONG).show();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                });
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -899,6 +911,8 @@ public class addNewInvoiceData extends AppCompatActivity {
             Toast.makeText(this, "Failed to save PDF", Toast.LENGTH_LONG).show();
         }
     }
+
+
     private void openPdf(File file) {
         Uri fileUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
         Intent intent = new Intent(Intent.ACTION_VIEW);

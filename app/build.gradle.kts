@@ -24,8 +24,8 @@ android {
         applicationId = "com.om_tat_sat.vedabill"
         minSdk = 24
         targetSdk = 34
-        versionCode = 4
-        versionName = "4.0"
+        versionCode = 5
+        versionName = "5.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -47,7 +47,7 @@ android {
 }
 
 dependencies {
-
+    implementation("com.google.firebase:firebase-storage:20.0.1")
     implementation("com.android.volley:volley:1.2.1")
     implementation ("com.google.android.gms:play-services-auth:20.2.0")
     implementation ("com.google.firebase:firebase-auth:21.0.6")

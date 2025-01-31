@@ -3,6 +3,7 @@ package com.om_tat_sat.vedabill.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.om_tat_sat.vedabill.R;
 import com.om_tat_sat.vedabill.apiPassword;
 
@@ -34,7 +37,7 @@ public class PdfAdapter extends RecyclerView.Adapter<PdfAdapter.PdfViewHolder> {
 
     private static List<File> pdfFiles;
     private static Context context;
-    private final String uuid;
+    private static String uuid = null;
 
     public PdfAdapter(Context context, List<File> pdfFiles,String uuid) {
         this.context = context;
@@ -58,6 +61,52 @@ public class PdfAdapter extends RecyclerView.Adapter<PdfAdapter.PdfViewHolder> {
         holder.generateRandomNumber.setOnClickListener(v -> shareLink(pdfFile.getName(), holder));
         holder.shareFile.setOnClickListener(v -> sharePdf(pdfFile));
     }
+    private void setupViewHolder(PdfViewHolder holder, File pdfFile) {
+        holder.invoiceName.setText(pdfFile.getName().split("_")[0]);
+        holder.invoiceDate.setText(context.getString(R.string.dated) + extractDateFromFileName(pdfFile.getName()));
+        holder.invoiceSent.setText(context.getString(R.string.sent_to) + extractSentToFromFileName(pdfFile.getName()).replace("#"," "));
+        holder.generateRandomNumber.setOnClickListener(v -> shareLink(pdfFile.getName(), holder));
+        holder.shareFile.setOnClickListener(v -> sharePdf(pdfFile));
+    }
+
+    private static void downloadAndSavePdf(String fileName) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference().child("pdf/" + uuid + "/" + fileName);
+        Log.e("downloadAndSavePdf", "gs://agniya/pdf/" + uuid + "/" + fileName);
+
+        try {
+            File storageDir = new File(context.getExternalFilesDir(null), "pdf/" + uuid);
+            if (!storageDir.exists()) {
+                boolean dirsCreated = storageDir.mkdirs();
+                if (!dirsCreated) {
+                    Log.e("PdfAdapter", "Failed to create directories: " + storageDir.getAbsolutePath());
+                    Toast.makeText(context, "Failed to create directory for PDF", Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    Log.d("PdfAdapter", "Storage directory created: " + storageDir.getAbsolutePath());
+                }
+            } else {
+                Log.d("PdfAdapter", "Storage directory already exists.");
+            }
+            final File localFile = new File(storageDir, fileName);
+
+            storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Log.d("PdfAdapter", "PDF downloaded and saved locally: " + localFile.getAbsolutePath());
+                Toast.makeText(context, "PDF downloaded and saved locally: " + localFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            }).addOnFailureListener(e -> {
+                Log.e("PdfAdapter", "Failed to download PDF: " + e.getMessage());
+                Toast.makeText(context, "Failed to download PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            });
+        } catch (Exception e) {
+            Log.e("PdfAdapter", "Error while downloading PDF: " + e.getMessage());
+            Toast.makeText(context, "Error while downloading PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+
+
 
     @Override
     public int getItemCount() {
@@ -74,21 +123,46 @@ public class PdfAdapter extends RecyclerView.Adapter<PdfAdapter.PdfViewHolder> {
             invoiceSent = itemView.findViewById(R.id.invoiceSent);
             generateRandomNumber = itemView.findViewById(R.id.generateRandomNumber);
             shareFile = itemView.findViewById(R.id.shareFile);
-            itemView.setOnClickListener(v -> openPdf(getAdapterPosition()));
+
+            itemView.setOnClickListener(v -> {
+                        Log.d("openPdf", "Opening PDF file: started1");
+                        openPdf(getAdapterPosition());
+                    }
+            );
         }
     }
     private static void openPdf(int position) {
+        Log.d("openPdf", "Opening PDF file: started");
+
         File pdfFile = pdfFiles.get(position);
+        Log.d("openPdf", "PDF file path: " + pdfFile.getAbsolutePath());
+
+        // Check if the file exists locally, if not download it
+        if (!pdfFile.exists()) {
+            Log.e("openPdf", "PDF file does not exist: " + pdfFile.getAbsolutePath());
+            downloadAndSavePdf(pdfFile.getName());
+            Toast.makeText(context, "PDF file does not exist: " + pdfFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", pdfFile);
+        Log.d("openPdf", "File URI: " + fileUri.toString());
+
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(fileUri, "application/pdf");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         try {
+            Log.d("openPdf", "Starting activity to view PDF...");
             context.startActivity(intent);
+            Log.d("openPdf", "PDF file opened successfully.");
         } catch (Exception e) {
-            Toast.makeText(context,context.getString(R.string.no_application_available), Toast.LENGTH_LONG).show();
+            Log.e("openPdf", "Failed to open PDF file: " + e.getMessage());
+            Toast.makeText(context, context.getString(R.string.no_application_available), Toast.LENGTH_LONG).show();
         }
     }
+
+
 
 
     private String extractDateFromFileName(String fileName) {

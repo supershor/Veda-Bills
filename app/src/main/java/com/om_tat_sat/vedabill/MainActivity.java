@@ -20,23 +20,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.om_tat_sat.vedabill.Adapters.PdfAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton addNewInvoice;
     RecyclerView pdfList;
     PdfAdapter pdfAdapter;
+    Set<File> pdfFilesSet;
     List<File> pdfFiles;
     FirebaseAuth mAuth;
     SharedPreferences app_language;
     int language = 0;
+    DatabaseReference databaseReferencePdfs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,50 +105,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadPdfFilesAndSetAdapter() {
-        pdfFiles = loadPdfFiles();
-        pdfAdapter = new PdfAdapter(this, pdfFiles, mAuth.getUid() != null ? mAuth.getUid() : "uuid");
-        pdfList.setAdapter(pdfAdapter);
-        Log.e("PDF Files Loaded", pdfFiles.toString());
-        Log.e("Adapter Set", "PDF Adapter is set with " + pdfFiles.size() + " items.");
+        pdfFilesSet = new HashSet<>(loadPdfFiles());
+
+        // Fetch PDF files from Firebase database
+        databaseReferencePdfs = FirebaseDatabase.getInstance().getReference("VedaBills").child(mAuth.getUid()).child("pdfs");
+        databaseReferencePdfs.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot pdfSnapshot : snapshot.getChildren()) {
+                        String fileName = pdfSnapshot.getValue(String.class);
+                        File pdfFile = new File(getExternalFilesDir(null), fileName);
+                        pdfFilesSet.add(pdfFile);
+                    }
+                }
+                // Convert Set to List and sort the files by last modified date in descending order
+                pdfFiles = new ArrayList<>(pdfFilesSet);
+                pdfFiles.sort((file1, file2) -> Long.compare(file2.lastModified(), file1.lastModified()));
+
+                // Set adapter after loading all PDF files
+                pdfAdapter = new PdfAdapter(MainActivity.this, pdfFiles, mAuth.getUid() != null ? mAuth.getUid() : "uuid");
+                pdfList.setAdapter(pdfAdapter);
+                Log.e("PDF Files Loaded", pdfFiles.toString());
+                Log.e("Adapter Set", "PDF Adapter is set with " + pdfFiles.size() + " items.");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.e("DatabaseError", "Error fetching PDF files from database: " + error.getMessage());
+            }
+        });
     }
 
-//    private List<File> loadPdfFiles() {
-//        // Load PDF files from the external files directory
-//        List<File> files = new ArrayList<>();
-//        File dir = getExternalFilesDir(null);
-//
-//        Log.e("loadPdfFiles: Directory", (dir != null) ? dir.toString() : "Directory is null");
-//
-//        if (dir != null && dir.exists()) {
-//            File[] pdfFiles = dir.listFiles((d, name) -> name.endsWith(".pdf"));
-//            if (pdfFiles != null) {
-//                for (File file : pdfFiles) {
-//                    files.add(file);
-//                }
-//            }
-//        }
-//        Log.e("loadPdfFiles: Files", files.toString());
-//        return files;
-//    }
     private List<File> loadPdfFiles() {
         // Load PDF files from the external files directory
         List<File> files = new ArrayList<>();
         File dir = getExternalFilesDir(null);
-
         Log.e("loadPdfFiles: Directory", (dir != null) ? dir.toString() : "Directory is null");
 
         if (dir != null && dir.exists()) {
             File[] pdfFiles = dir.listFiles((d, name) -> name.endsWith(".pdf"));
             if (pdfFiles != null) {
                 files.addAll(Arrays.asList(pdfFiles));
-                // Sort the files by last modified date in descending order
-                files.sort((file1, file2) -> Long.compare(file2.lastModified(), file1.lastModified()));
             }
         }
-        Log.e("loadPdfFiles: Files", files.toString());
         return files;
     }
-
 
     private void applyLanguage() {
         if (language == 0) {
